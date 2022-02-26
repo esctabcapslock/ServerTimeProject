@@ -1,16 +1,20 @@
-from fake_useragent import UserAgent
+# from fake_useragent import UserAgent
 from datetime import datetime, timedelta
 from time import sleep
 from random import uniform
-import urllib.request
+# import urllib.request
+import sk
 
-ua = UserAgent()
+ua = ''
 tURL = ''
-req = urllib.request.Request(tURL, headers={"User-Agent": ua.random})
+domain = ''
+# req = urllib.request.Request(tURL, headers={"User-Agent": ua})
+# req = urllib.request.Request(tURL, headers={"User-Agent": ua})
+header = sk.myrequest(domain)
 chk = []
 
 st_b = st = datetime.now()
-tar_b = tar = datetime.strptime(urllib.request.urlopen(req).headers['Date'], '%a, %d %b %Y %H:%M:%S %Z')
+tar_b = tar = datetime.strptime(sk.myrequest(domain)['Date'], ' %a, %d %b %Y %H:%M:%S %Z')
 nd_b = nd = datetime.now()
 with open("pinglog.txt", "w", encoding='utf-8') as f:
     f.write('Ping target : ' + tURL + '\n')
@@ -19,7 +23,7 @@ with open("pinglog.txt", "w", encoding='utf-8') as f:
 
 while True:
     st = datetime.now()
-    tar = datetime.strptime(urllib.request.urlopen(req).headers['Date'], '%a, %d %b %Y %H:%M:%S %Z')
+    tar = datetime.strptime(sk.myrequest(domain)['Date'], ' %a, %d %b %Y %H:%M:%S %Z')
     nd = datetime.now()
     chk.append((nd - st).total_seconds())
     with open("pinglog.txt", "a", encoding='utf-8') as f:
@@ -48,13 +52,13 @@ st_b -= ans_int
 ans_f = st_b
 ans_b = nd
 chk = []
-for _ in range(60):
+for _ in range(10):
     sleep(2 - st_b - datetime.now().microsecond/1000000 + uniform(-1.6 * avg_atp, 0.4 * avg_atp))
     t_st_b = datetime.now()
-    t_tar_b = datetime.strptime(urllib.request.urlopen(req).headers['Date'], '%a, %d %b %Y %H:%M:%S %Z')
+    t_tar_b = datetime.strptime(sk.myrequest(domain)['Date'], ' %a, %d %b %Y %H:%M:%S %Z')
     t_nd_b = datetime.now()
     t_st = datetime.now()
-    t_tar = datetime.strptime(urllib.request.urlopen(req).headers['Date'], '%a, %d %b %Y %H:%M:%S %Z')
+    t_tar = datetime.strptime(sk.myrequest(domain)['Date'], ' %a, %d %b %Y %H:%M:%S %Z')
     t_nd = datetime.now()
     t_tar_b += timedelta(hours=9)  # UTC+9 맞추기
     t_tar += timedelta(hours=9)  # UTC+9 맞추기
