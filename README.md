@@ -31,3 +31,5 @@ ms 단위로 결과를 출력하고, 로컬 시간에 해당 보정값을 더해
 - [sk.py](./sk.py)를 추가하였다. `urllib.request`에서 302 헤더 등을 보다 깔끔하게 처리할 겸 소캣 공부를 하기 위해 socket 모듈로 갈아치웠다.
 - 대충 윈도우 `curl`함수랑 비슷하게 했음.
 - 안먹히는 사이트 발견.... -> https로 가야하나???
+- **Rust 재작성 + GUI 추가**
+  - https://github.com/esctabcapslock/Pickpick 참조바람
